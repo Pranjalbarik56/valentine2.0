@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine 💗</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffb6d5, #ffe6f0);
+        }
+
+        .bg-hearts {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .bg-heart {
+            position: absolute;
+            bottom: -60px;
+            animation: floatUp linear infinite;
+            opacity: 0.85;
+            filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.8));
+        }
+
+        .bg-heart::after {
+            content: "✨";
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            font-size: 10px;
+            animation: sparkle 2s infinite ease-in-out;
+            opacity: 0.7;
+        }
+
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0) scale(0.8);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-120vh) scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px 20px 60px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2rem;
+        }
+
+        .big-heart {
+            font-size: 80px;
+            animation: heartbeat 1.5s infinite;
+            filter: drop-shadow(0 0 12px #ff5fa2);
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        #noMessage {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #b00050;
+            margin-top: 10px;
+            min-height: 30px;
+        }
+
+        .buttons {
+            position: relative;
+            height: 200px;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 18px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            transition: 0.3s;
+        }
+
+        #yesBtn {
+            background: #ff4d88;
+            color: white;
+            left: 30%;
+            top: 80px;
+            box-shadow: 0 0 15px rgba(255, 77, 136, 0.6);
+        }
+
+        #noBtn {
+            background: #ccc;
+            left: 55%;
+            top: 80px;
+        }
+
+        .black-screen {
+            position: fixed;
+            inset: 0;
+            background: black;
+            display: none;
+            z-index: 999;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 26px;
+            animation: explode 1.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            from {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: scale(2) translateY(-200px);
+                opacity: 0;
+            }
+        }
+
+        .final-page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .final-page h2 {
+            color: #ff1f75;
+            font-size: 2.2rem;
+        }
+
+        .poem {
+            color: #a0004d;
+            font-size: 1.2rem;
+            white-space: pre-line;
+            margin: 20px 0;
+        }
+
+        .photo-frame {
+            background: white;
+            padding: 12px;
+            border-radius: 25px;
+            box-shadow: 0 0 25px rgba(255, 100, 160, 0.7);
+        }
+
+        .photo-frame img {
+            max-width: 280px;
+            border-radius: 18px;
+        }
+
+        .final-page p {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: #d63384;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-hearts" id="bgHearts"></div>
+
+    <audio id="music" loop>
+        <source src="romantic.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+
+        <div class="card" id="mainPage">
+            <h1>Will you be my Valentine, Javin? 💗</h1>
+            <div class="big-heart">💖</div>
+            <div id="noMessage"></div>
+
+            <div class="buttons">
+                <button id="yesBtn">Yes</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
+
+        <div class="final-page" id="finalPage">
+            <h2>Yeah! I knew you’d say yes! 💖💖</h2>
+
+            <div class="poem">
+                I always told you I'm an open book for you and you're the most precious chapter of this.
+                You have never been an option for me, you're always my one and only choice.
+                I love you and I care for you and you know what you personally deserve all the happiness...
+                I LOVE YOUUU A LOT AND I ALWAYS BEEN THERE FOR YOU ALWAYS ❤️
+            </div>
+
+            <div class="photo-frame">
+                <img src="javin.jpeg" alt="Javin 💗" onerror="this.style.display='none'">
+            </div>
+
+            <p>This is only for you, Javin.. 💗</p>
+        </div>
+
+    </div>
+
+    <div class="black-screen" id="blackScreen"></div>
+
+    <script>
+        const bg = document.getElementById("bgHearts");
+        const heartEmojis = ["💗", "💖", "💞", "💘", "💕"];
+
+        setInterval(() => {
+            const h = document.createElement("div");
+            h.className = "bg-heart";
+            h.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            h.style.left = Math.random() * 100 + "%";
+            h.style.fontSize = 20 + Math.random() * 25 + "px";
+            h.style.animationDuration = 10 + Math.random() * 10 + "s";
+            bg.appendChild(h);
+            setTimeout(() => h.remove(), 20000);
+        }, 450);
+
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+        const noMessage = document.getElementById("noMessage");
+        const blackScreen = document.getElementById("blackScreen");
+        const mainPage = document.getElementById("mainPage");
+        const finalPage = document.getElementById("finalPage");
+        const music = document.getElementById("music");
+
+        let count = 0;
+        const messages = ["Wait… are you sure? 🥹", "Really?", "Sure?", "Nice try", "Once more", "No escape", "Haha, nice try"];
+
+        noBtn.onclick = () => {
+            noMessage.innerText = messages[count++ % messages.length];
+            noBtn.style.left = Math.random() * 80 + "%";
+            noBtn.style.top = Math.random() * 70 + "%";
+        };
+
+        yesBtn.onclick = () => {
+            music.volume = 0.6;
+            music.currentTime = 0;
+            music.play().catch(() => { });
+
+            blackScreen.innerHTML = "";
+            blackScreen.style.display = "block";
+
+            for (let i = 0; i < 70; i++) {
+                const e = document.createElement("div");
+                e.className = "heart";
+                e.innerText = "💗";
+                e.style.left = Math.random() * 100 + "%";
+                e.style.top = Math.random() * 100 + "%";
+                blackScreen.appendChild(e);
+            }
+
+            setTimeout(() => {
+                blackScreen.style.display = "none";
+                mainPage.style.display = "none";
+                finalPage.style.display = "flex";
+            }, 2000);
+        };
+    </script>
+
+</body>
+
+</html>
